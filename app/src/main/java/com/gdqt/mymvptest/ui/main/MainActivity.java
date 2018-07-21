@@ -65,6 +65,7 @@ public class MainActivity extends BaseActivity implements IMainView {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
     }
 }
 

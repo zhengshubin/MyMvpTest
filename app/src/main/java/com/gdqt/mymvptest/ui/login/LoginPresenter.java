@@ -23,7 +23,7 @@ import io.reactivex.schedulers.Schedulers;
 public class LoginPresenter<V extends ILoginView> extends BasePresenter<V> implements ILoginPresenter<V> {
     private static final String TAG = "LoginPresenter";
     private LoginModel loginModel;
-    public LoginPresenter(LifecycleProvider<ActivityEvent> provider) {
+    protected LoginPresenter(LifecycleProvider<ActivityEvent> provider) {
         super(provider);
         loginModel=new LoginModel();
     }

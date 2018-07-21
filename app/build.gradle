@@ -41,4 +41,8 @@ dependencies {
     implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1'
     implementation 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.1'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6'
+    // Optional, if you use support library fragments:
+    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6'
 }

@@ -12,11 +12,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.gdqt.mymvptest.Application.MyApplication;
 import com.gdqt.mymvptest.R;
 import com.gdqt.mymvptest.common.ActivityCollector;
 import com.gdqt.mymvptest.common.CancelLoadingListener;
 import com.gdqt.mymvptest.common.CustomProgressDialog;
 import com.gdqt.mymvptest.utils.LogUtils;
+import com.squareup.leakcanary.RefWatcher;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -122,6 +124,7 @@ public class BaseActivity extends RxAppCompatActivity implements IBaseView {
             mUnBinder.unbind();
         }
         super.onDestroy();
+
     }
 
     @Override
