@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<item
+    android:title="action"
+
+    android:id="@+id/toolbar_back"
+    android:icon="@drawable/ic_arrow_back_white_24dp"
+app:showAsAction="always"
+    ></item>
+    <item android:title="dddd"
+        android:id="@+id/toolbar_title"
+        app:showAsAction="never"
+/>
+</menu>

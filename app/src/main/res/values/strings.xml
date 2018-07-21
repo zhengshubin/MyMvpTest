@@ -1,0 +1,83 @@
+<resources>
+    <string name="user_null">用户名或密码不能为空</string>
+    <string name="connectException">网络连接失败，请检查你的网络</string>
+    <string name="SP_USER_NAME">USER_NAME</string>
+    <string name="SP_USER_PASSWORD">USER_PASSWORD</string>
+    <string name="SP_ISLOGINED">ISLOGINED</string>
+    <string name="app_name">压力远传</string>
+    <string name="action_realData">实时监测</string>
+    <string name="action_map">地图显示</string>
+    <string name="action_chart">压力分析</string>
+    <string name="action_search">数据查询</string>
+    <string name="action_setting">系统设置</string>
+    <string name="action_quit">退出软件</string>
+    <string name="action_refresh">刷新</string>
+
+    <string name="alphabet_and_number">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</string>
+    <string name="chart_show">图表展示</string>
+
+    <string name="cancle">取消</string>
+    <string name="title">请选择时间</string>
+    <string name="commit">确定</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <string name="hour">时</string>
+    <string name="minute">分</string>
+
+    <!--登录页面相关-->
+    <string name="app_name_ch">供水管网压力管控系统</string>
+    <string name="login_text_login">登  录</string>
+    <string name="login_text_username">用户名</string>
+    <string name="login_text_password">密  码</string>
+    <string name="login_text_copyright">©2017 广东青藤环境科技有限公司 版权所有 v2.0</string>
+
+    <!--历史页面相关-->
+    <string name="history_start_time">开始时间:</string>
+    <string name="history_end_time">结束时间:</string>
+    <string name="history_ffm_name">站点名称:</string>
+    <string name="history_button_search">查询</string>
+
+    <!--压力分析曲线图页面相关-->
+    <string name="pressure_chart_countdate">日期:</string>
+    <string name="pressure_chart_countinterval">统计间隔:</string>
+    <string name="pressure_chart_hour">小时</string>
+    <string name="pressure_chart_choosesite">站点选择:</string>
+    <string name="pressure_chart_button_search">查询</string>
+
+    <!--压力分析表格页面相关-->
+    <string name="pressure_table_countdate">统计日期:</string>
+    <string name="pressure_table_ffmname">站点名称:</string>
+    <string name="pressure_table_button_search">查询</string>
+    <string name="pressure_table_max_pressure">最大压力值(MPa):</string>
+    <string name="pressure_table_min_pressure">最小压力值(MPa):</string>
+
+    <!--压力分析页面相关-->
+    <string name="pressure_day_button_table">日压力报表</string>
+    <string name="pressure_day_button_chart">日压力曲线</string>
+    <string name="pressure_day_button_avg">日压力平均</string>
+    <string name="pressure_month_button_table">月压力报表</string>
+    <string name="pressure_month_button_chart">月压力曲线</string>
+    <string name="pressure_month_button_avg">月压力平均</string>
+
+    <!--实时监测页面相关-->
+    <string name="realdata_table_ffmname">站点名称:</string>
+    <string name="realdata_table_conduit_pressure">管道压力(MPa):</string>
+    <string name="realdata_table_battery_voltage">电池电压(V):</string>
+    <string name="realdata_table_time">采集时间:</string>
+
+    <!--个人信息页面相关-->
+    <string name="setting_nickname">昵称:</string>
+    <string name="setting_password">密码:</string>
+    <string name="setting_remark">备注:</string>
+    <string name="setting_button_updatepw">修改密码</string>
+    <string name="setting_updatepassword_newpassword">请输入新密码</string>
+    <string name="setting_confirm_newpassword_again">请再一次输入密码</string>
+
+    <!--date_picker_dialog插件相关-->
+    <string name="date_picker_dialog_starttime">开始日期</string>
+    <string name="date_picker_dialog_endtime">结束日期</string>
+
+    <!--main_image页面相关-->
+    <string name="main_image_acquisitiontime">采集时间点:</string>
+</resources>
