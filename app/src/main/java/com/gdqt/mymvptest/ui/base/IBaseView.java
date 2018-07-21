@@ -5,7 +5,7 @@ import android.support.annotation.StringRes;
 import butterknife.BindString;
 
 public interface IBaseView<T > {
-    void setToolbarTitleOrHomeAsUp(String title,boolean isNeedHomeAsUp);
+    void setHomeAsUp(boolean isNeedHomeAsUp);
 
 void hideToolbar();
    void  showLoding();
@@ -13,5 +13,6 @@ void hideToolbar();
    void  onError(int resId );
    void onError(String message);
    void netDisconnect();
+
 
 }

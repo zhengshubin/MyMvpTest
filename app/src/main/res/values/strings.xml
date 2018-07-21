@@ -80,4 +80,7 @@
 
     <!--main_image页面相关-->
     <string name="main_image_acquisitiontime">采集时间点:</string>
+    <!--页面label-->
+    <string name="label_main">主界面</string>
+    <string name="laben_login">登录界面</string>
 </resources>

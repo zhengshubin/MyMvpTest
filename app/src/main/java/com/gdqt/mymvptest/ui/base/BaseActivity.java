@@ -2,6 +2,7 @@ package com.gdqt.mymvptest.ui.base;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,8 +18,6 @@ import com.gdqt.mymvptest.common.CancelLoadingListener;
 import com.gdqt.mymvptest.common.CustomProgressDialog;
 import com.gdqt.mymvptest.utils.LogUtils;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
-
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.disposables.Disposable;
@@ -26,10 +25,7 @@ import io.reactivex.disposables.Disposable;
 public class BaseActivity extends RxAppCompatActivity implements IBaseView {
     private static final String TAG = "BaseActivity";
     public Unbinder mUnBinder;
-    @BindView(R.id.tool_bar)
-    Toolbar mToolBar;
-    @BindView(R.id.tv_toolbar_title)
-    TextView tvToolbarTitle;
+   private     Toolbar mToolBar;
     private CustomProgressDialog mProgressDialog;
     private BasePresenter<IBaseView> mBasePresenter;
 
@@ -37,19 +33,27 @@ public class BaseActivity extends RxAppCompatActivity implements IBaseView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityCollector.addActivity(this);
+        initProgressBar();
 
 
     }
 
 
-    public void setContentView(int layoutResID) {
-        View view = linkLayout(R.layout.layout_toolbar, layoutResID);
-        super.setContentView(view);
-        setUnbinder(ButterKnife.bind(this, view));
+
+    public void setContentView(int layoutResID, String title, boolean isNeedHomeAsUp) {
+       View view = linkLayout(R.layout.layout_toolbar, layoutResID);
+       super.setContentView(view);
+       setUnbinder(ButterKnife.bind(this,view));
+       mToolBar=view.findViewById(R.id.tool_bar);
+        mToolBar.setTitle(title);
         setSupportActionBar(mToolBar);
-        initProgressBar();
+        setHomeAsUp(isNeedHomeAsUp);
+    }
 
-
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+        setUnbinder(ButterKnife.bind(this));
     }
 
     //连接两个布局
@@ -121,12 +125,12 @@ public class BaseActivity extends RxAppCompatActivity implements IBaseView {
     }
 
     @Override
-    public void setToolbarTitleOrHomeAsUp(String title, boolean isNeedHomeAsUp) {
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        tvToolbarTitle.setText(title);
-        if (isNeedHomeAsUp) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
+    public void setHomeAsUp(boolean isNeedHomeAsUp) {
+        ActionBar actionBar=getSupportActionBar();
+        if (isNeedHomeAsUp&&actionBar!=null) {
+
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
         }
     }
 
@@ -171,6 +175,5 @@ public class BaseActivity extends RxAppCompatActivity implements IBaseView {
     public void setUnbinder(Unbinder unBinder) {
         mUnBinder = unBinder;
     }
-
 
 }

@@ -31,7 +31,6 @@ public class LoginActivity extends BaseActivity implements ILoginView  {
     }
 void  initView(){
     initPresenter(mPresenter);
-    hideToolbar();
     mPresenter.autoLogin();
 
 

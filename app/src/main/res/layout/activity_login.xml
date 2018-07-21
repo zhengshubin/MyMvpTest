@@ -74,6 +74,7 @@
         android:padding="10dp"
         android:text=""
         android:textSize="20sp"
+        android:textColor="@color/black"
         android:singleLine="true"
 
         android:imeOptions="actionNext"/>
@@ -86,6 +87,7 @@
         android:layout_alignStart="@+id/et_username"
         android:layout_below="@+id/et_username"
         android:layout_marginBottom="10dp"
+        android:textColor="@color/black"
         android:layout_marginRight="20dp"
 
         android:background="@drawable/edit_bg"
