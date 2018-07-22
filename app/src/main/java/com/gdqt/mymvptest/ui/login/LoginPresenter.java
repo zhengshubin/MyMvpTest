@@ -22,10 +22,11 @@ import io.reactivex.schedulers.Schedulers;
 
 public class LoginPresenter<V extends ILoginView> extends BasePresenter<V> implements ILoginPresenter<V> {
     private static final String TAG = "LoginPresenter";
-    private LoginModel loginModel;
+    private LoginModel loginModel=null;
     protected LoginPresenter(LifecycleProvider<ActivityEvent> provider) {
         super(provider);
         loginModel=new LoginModel();
+        
     }
 
 
@@ -33,15 +34,15 @@ public class LoginPresenter<V extends ILoginView> extends BasePresenter<V> imple
     public void onLoginClick(final String username, final String password) {
 
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
-            mView.onError(R.string.user_null);
+          getView().onError(R.string.user_null);
             return;
         }
         //网络
         if (!NetworkUtils.isNetworkConnected()){
-            mView.netDisconnect();
+            getView().netDisconnect();
             return;
         }
-        mView.showLoding();
+       getView().showLoding();
         final MyObserver myObserver = new MyObserver(new ValueCallBack<AppData<Map<String, Object>>>() {
 
 
@@ -58,8 +59,8 @@ public class LoginPresenter<V extends ILoginView> extends BasePresenter<V> imple
                 }
                 try {
                     if (DisklrucacheUtils.setLocalData(subjects.getList())) {
-                        mView.hideLoding();
-                        mView.loginSucess();
+                        getView().hideLoding();
+                        getView().loginSucess();
                         saveLoginInfo(username,password);
                     }
                 } catch (IOException e) {
@@ -75,8 +76,8 @@ public class LoginPresenter<V extends ILoginView> extends BasePresenter<V> imple
                 if (!isViewAttached()){
                     return;
                 }
-                mView.hideLoding();
-                mView.onError(e.getMessage());
+                getView().hideLoding();
+                getView().onError(e.getMessage());
 
             }
 
@@ -106,7 +107,7 @@ public class LoginPresenter<V extends ILoginView> extends BasePresenter<V> imple
     public void autoLogin() {
         LoginSPInfo info = loginModel.getDataFromSP();
         if (info.isLogined()) {
-            mView.autoLoginView();
+            getView().autoLoginView();
 
         }
     }

@@ -26,10 +26,13 @@ import io.reactivex.disposables.Disposable;
 
 public class BaseActivity extends RxAppCompatActivity implements IBaseView {
     private static final String TAG = "BaseActivity";
-    public Unbinder mUnBinder;
+
+    private Unbinder mUnBinder;
    private     Toolbar mToolBar;
     private CustomProgressDialog mProgressDialog;
-    private BasePresenter<IBaseView> mBasePresenter;
+
+    private BasePresenter mPresenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +73,9 @@ public class BaseActivity extends RxAppCompatActivity implements IBaseView {
     }
 
     //初始化presenter
-    public void initPresenter(BasePresenter basePresenter) {
-        mBasePresenter = basePresenter;
-        mBasePresenter.onAttach(this);
+    public void initPresenter(BasePresenter presenter) {
+        mPresenter =  presenter;
+        mPresenter.onAttach(this);
 
 
     }
@@ -82,7 +85,7 @@ public class BaseActivity extends RxAppCompatActivity implements IBaseView {
         mProgressDialog = new CustomProgressDialog(this, new CancelLoadingListener() {
             @Override
             public void cancelLoding() {
-                Disposable disposable = mBasePresenter.getDisposable();
+                Disposable disposable = mPresenter.getDisposable();
                 if (disposable != null && !disposable.isDisposed()) {
                     LogUtils.d(TAG, "cancelLoding: " + "dispose");
                     disposable.dispose();
@@ -117,8 +120,8 @@ public class BaseActivity extends RxAppCompatActivity implements IBaseView {
     @Override
     protected void onDestroy() {
         ActivityCollector.removeActivity(this);
-        if (mBasePresenter != null) {
-            mBasePresenter.onDetach();
+        if (mPresenter != null) {
+            mPresenter.onDetach();
         }
         if (mUnBinder != null) {
             mUnBinder.unbind();

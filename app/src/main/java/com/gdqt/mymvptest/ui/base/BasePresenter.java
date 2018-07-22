@@ -1,14 +1,24 @@
 package com.gdqt.mymvptest.ui.base;
 
+import com.gdqt.mymvptest.ui.login.LoginModel;
+import com.gdqt.mymvptest.ui.main.MainModel;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import io.reactivex.disposables.Disposable;
 
 public class BasePresenter<V extends IBaseView> implements IBasePresenter<V> {
-    public LifecycleProvider<ActivityEvent> mProvider;
-    private Disposable mDisposable;
-public V mView;
+    protected LifecycleProvider<ActivityEvent> mProvider;
+    protected Disposable mDisposable;
+
+    protected V getView() {
+        return mView;
+    }
+
+    public void setView(V view) {
+        mView = view;
+    }
+    private V mView;
 private static final String TAG="BasePrensenter";
     public Disposable getDisposable() {
         return mDisposable;
@@ -22,7 +32,6 @@ private static final String TAG="BasePrensenter";
 
     public  BasePresenter(LifecycleProvider<ActivityEvent> provider){
         mProvider=provider;
-
     }
     @Override
     public void onAttach(V view) {

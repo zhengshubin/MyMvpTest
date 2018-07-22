@@ -15,15 +15,15 @@
         />
 
     <TextView
-        android:id="@+id/tv_username"
+        android:id="@+id/tv_head_username"
         android:text="郑淑彬"
         android:textColor="#fff"
         android:textSize="14sp"
-        android:layout_above="@+id/tv_mail"
+        android:layout_above="@+id/tv_head_mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
-        android:id="@+id/tv_mail"
+        android:id="@+id/tv_head_mail"
         android:text="zhenghsubin@hotmail.com"
         android:layout_alignParentBottom="true"
         android:textAllCaps="false"

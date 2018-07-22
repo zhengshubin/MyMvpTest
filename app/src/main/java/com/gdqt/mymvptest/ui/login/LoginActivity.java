@@ -13,7 +13,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity implements ILoginView  {
-    private LoginPresenter<ILoginView> mPresenter = new LoginPresenter(this);
+private LoginPresenter mPresenter=null;
     @BindView(R.id.et_username)
     EditText etUsername;
     @BindView(R.id.et_password)
@@ -26,12 +26,14 @@ public class LoginActivity extends BaseActivity implements ILoginView  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        setContentView(R.layout.activity_login);
+       mPresenter=new LoginPresenter(this);
+       initPresenter(mPresenter);
        initView();
 
     }
 void  initView(){
-    initPresenter(mPresenter);
-    mPresenter.autoLogin();
+
+   mPresenter.autoLogin();
 
 
 }
