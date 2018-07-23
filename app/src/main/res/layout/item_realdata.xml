@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+<TextView
+    android:id="@+id/tv_item_ffm_name"
+    android:layout_width="0dp"
+    android:layout_weight="1"
+    android:layout_height="wrap_content"
+    android:text="站点名称"
+    android:gravity="center"
+    android:layout_gravity="center"
+    />
+    <view
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="#ddd"
+        />
+    <TextView
+        android:id="@+id/tv_item_pipe_pressure"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="压力值"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content" />
+    <view
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="#ddd"
+        />
+    <TextView
+        android:id="@+id/tv_item_freeze_date"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="采集时间"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content" />
+</LinearLayout>

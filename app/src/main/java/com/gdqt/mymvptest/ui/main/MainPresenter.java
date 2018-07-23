@@ -2,7 +2,6 @@ package com.gdqt.mymvptest.ui.main;
 
 import com.gdqt.mymvptest.ui.base.BasePresenter;
 import com.gdqt.mymvptest.ui.base.IBaseView;
-import com.squareup.haha.perflib.Main;
 import com.trello.rxlifecycle2.LifecycleProvider;
 
 import java.util.Map;
@@ -18,11 +17,22 @@ public class MainPresenter<V extends  IMainView> extends BasePresenter<V> implem
 
     @Override
     public void onNav_header() {
-      Map<String,Object>  map= mainModel.getUserInfo();
-      getView().showNav_header(map);
+      getView().showNav_header(mainModel.getUserInfo());
 
 
 
 
+
+    }
+
+    @Override
+    public void onGridView() {
+        getView().initGridView(mainModel.getGridViewData());
+
+    }
+
+    @Override
+    public void onHeader_click(Map<String,Object> map) {
+        getView().OpenUserInfoActivity( mainModel.setUserInfoEvent(map));
     }
 }

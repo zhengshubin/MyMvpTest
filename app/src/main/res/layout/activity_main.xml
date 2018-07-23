@@ -25,6 +25,18 @@
                 app:layout_scrollFlags="scroll|enterAlways|snap"
                 />
         </android.support.design.widget.AppBarLayout>
+        <GridView
+           android:id="@+id/gv_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="30dp"
+            android:horizontalSpacing="10dp"
+            android:verticalSpacing="50dp"
+           android:numColumns="3"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
+
+        </GridView>
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView

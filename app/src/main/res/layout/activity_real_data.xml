@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.realdata.RealDataActivity">
+<com.yalantis.phoenix.PullToRefreshView
+    android:id="@+id/refresh_realData"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_realData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+</com.yalantis.phoenix.PullToRefreshView>
+</LinearLayout>

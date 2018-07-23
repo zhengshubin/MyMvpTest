@@ -18,7 +18,6 @@ import com.gdqt.mymvptest.common.ActivityCollector;
 import com.gdqt.mymvptest.common.CancelLoadingListener;
 import com.gdqt.mymvptest.common.CustomProgressDialog;
 import com.gdqt.mymvptest.utils.LogUtils;
-import com.squareup.leakcanary.RefWatcher;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
