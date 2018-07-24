@@ -17,7 +17,7 @@ public   Disposable mDisposable;
     @Override
     public void onSubscribe(Disposable d) {
         mcallBack.onSubscribe(d);
-        setDisposable(d);
+
     }
 
     @Override
@@ -46,7 +46,5 @@ mcallBack.onComplete();
 
     }
 
-    public void setDisposable(Disposable getDisposable) {
-        this.mDisposable = getDisposable;
-    }
+
 }

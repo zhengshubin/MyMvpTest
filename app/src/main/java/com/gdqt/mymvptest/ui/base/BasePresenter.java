@@ -8,10 +8,13 @@ import com.trello.rxlifecycle2.android.ActivityEvent;
 import io.reactivex.disposables.Disposable;
 
 public class BasePresenter<V extends IBaseView> implements IBasePresenter<V> {
-    protected LifecycleProvider<ActivityEvent> mProvider;
-    protected Disposable mDisposable;
+    private LifecycleProvider<ActivityEvent> mProvider;
+    private Disposable mDisposable;
+    public LifecycleProvider<ActivityEvent> getProvider(){
+        return  mProvider;
 
-    protected V getView() {
+    }
+    public V getView() {
         return mView;
     }
 

@@ -1,28 +1,51 @@
 package com.gdqt.mymvptest.common;
 
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gdqt.mymvptest.R;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+    private static final  int TYPE_HEADER=0;
+    private static  final int TYPE_NORMAL=1;
+    private static final int TYPE_FOOTOR=2;
     private List<Map<String,Object>> list;
     public  MyAdapter(List<Map<String,Object>> list){
         this.list=list;
 
 
     }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position==0){
+            return TYPE_HEADER;
+        }
+        return TYPE_NORMAL;
+
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view=View.inflate(parent.getContext(),R.layout.item_realdata,parent);
+        View view=null;
+        if (viewType==TYPE_HEADER){
+           view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_realdata_hearder,parent,false);
+        }else {
+            view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_realdata,parent,false);
+        }
+
         ViewHolder viewHolder=new ViewHolder(view);
         return viewHolder;
     }

@@ -2,6 +2,8 @@ package com.gdqt.mymvptest.ui.base;
 
 
 import com.gdqt.mymvptest.common.RetrofitManager;
+import com.trello.rxlifecycle2.LifecycleProvider;
+import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -23,10 +25,16 @@ public class BaseModel<T> implements IBaseModel<T> {
 
 
     }
+/**
+* author:zhengshubin
+*create：2018/7/24
+* description:
+ * observable：lifecycleProvider:rxliferecycle   回收disposable  防止内存泄漏
 
+*/
     @Override
-    public void toSubscribe(Observable<T> observable, Observer<T> observer) {
-                observable.subscribeOn(Schedulers.io())
+    public void toSubscribe(Observable<T> observable, Observer<T> observer,LifecycleProvider<ActivityEvent> provider) {
+                observable.subscribeOn(Schedulers.io()).compose(provider.<T>bindUntilEvent(ActivityEvent.STOP))
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);

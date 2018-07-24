@@ -48,7 +48,7 @@ public class LoginPresenter<V extends ILoginView> extends BasePresenter<V> imple
 
             @Override
             public void onSubscribe(Disposable d) {
-
+                             setDisposable(d);
 
             }
 
@@ -88,12 +88,7 @@ public class LoginPresenter<V extends ILoginView> extends BasePresenter<V> imple
 
             }
         });
-        loginModel.login(username, password)
-                .compose(mProvider.bindUntilEvent(ActivityEvent.STOP))//RxlifeCycle 的使用
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(myObserver);
+loginModel.login(username,password,myObserver,getProvider());
 
 
     }

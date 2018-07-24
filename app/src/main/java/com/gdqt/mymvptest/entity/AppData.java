@@ -2,6 +2,7 @@ package com.gdqt.mymvptest.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by admin on 2017/10/10.
