@@ -1,9 +1,11 @@
 package com.gdqt.mymvptest.ui.base;
 
-import com.gdqt.mymvptest.ui.login.LoginModel;
-import com.gdqt.mymvptest.ui.main.MainModel;
+import com.trello.rxlifecycle.android.ActivityEvent;
 import com.trello.rxlifecycle2.LifecycleProvider;
-import com.trello.rxlifecycle2.android.ActivityEvent;
+
+import java.lang.ref.Reference;
+import java.lang.ref.WeakReference;
+
 
 import io.reactivex.disposables.Disposable;
 
@@ -12,16 +14,12 @@ public class BasePresenter<V extends IBaseView> implements IBasePresenter<V> {
     private Disposable mDisposable;
     public LifecycleProvider<ActivityEvent> getProvider(){
         return  mProvider;
-
     }
     public V getView() {
-        return mView;
+        return mView.get();
     }
-
-    public void setView(V view) {
-        mView = view;
-    }
-    private V mView;
+    //弱应用
+    private Reference<V> mView;
 private static final String TAG="BasePrensenter";
     public Disposable getDisposable() {
         return mDisposable;
@@ -39,12 +37,13 @@ private static final String TAG="BasePrensenter";
     @Override
     public void onAttach(V view) {
         if (view!=null)
-        mView =view;
+       mView=new WeakReference<V>(view);
     }
 
     @Override
     public void onDetach() {
         if (mView!=null){
+            mView.clear();
             mView=null;
         }
 
@@ -53,6 +52,6 @@ private static final String TAG="BasePrensenter";
 
     }
     public  boolean isViewAttached(){
-        return mView!=null;
+        return mView!=null&&mView.get()!=null;
     }
 }
