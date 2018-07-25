@@ -5,7 +5,7 @@ package com.gdqt.mymvptest.common;
 * description:分页加载监听事件
 */
 public interface PageLoadingListener {
-    void loading();
-    void  loadSucess();
-    void loadFail();
+
+    void  loadData();
+
 }

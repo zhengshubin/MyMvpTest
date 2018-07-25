@@ -1,6 +1,7 @@
 package com.gdqt.mymvptest.ui.realdata;
 
 import android.nfc.Tag;
+import android.util.Log;
 
 import com.gdqt.mymvptest.common.MyObserver;
 import com.gdqt.mymvptest.common.ValueCallBack;
@@ -24,19 +25,22 @@ import io.reactivex.schedulers.Schedulers;
 
 public class RealDataPresenter<V extends IRealDataView> extends BasePresenter<V> implements  IRealDataPresenter<V> {
     private  RealDataModel  mModel=null;
+    private static final String TAG="RealDataPresenter";
     public RealDataPresenter(LifecycleProvider<ActivityEvent> provider) {
         super(provider);
         mModel=new RealDataModel();
     }
 
     @Override
-    public void onShowRealData(Map<String,String> map) {
+    public void onFirstShowRealData(Map<String,String> map, final boolean isRefresh) {
         if (!NetworkUtils.isNetworkConnected()){
             getView().netDisconnect();
             return;
         }
-        getView().showLoding();
-
+        //如果不是刷新类型就不需要打开加载画面
+        if (!isRefresh) {
+            getView().showLoding();
+        }
         MyObserver observer = new MyObserver(new ValueCallBack<AppData<Map<String, Object>>>() {
 
             @Override
@@ -50,7 +54,9 @@ public class RealDataPresenter<V extends IRealDataView> extends BasePresenter<V>
                 if (!isViewAttached()){
                     return;
                 }
-                getView().hideLoding();
+                if (!isRefresh) {
+                    getView().hideLoding();
+                }
                 List<Map<String,Object>> list=new ArrayList<>();
 
                 Map<String,Object> map=new HashMap<>();
@@ -63,7 +69,7 @@ public class RealDataPresenter<V extends IRealDataView> extends BasePresenter<V>
                 }
 
                 LogUtils.d("DDF",list.get(0).toString());
-                  getView().showRecyclerView(list);
+                  getView().showRecyclerView(list,Integer.parseInt(subjects.getTotal()));
 
 
             }
@@ -82,5 +88,59 @@ public class RealDataPresenter<V extends IRealDataView> extends BasePresenter<V>
 
         });
         mModel.getRealData(map,observer,getProvider());
+    }
+
+    @Override
+    public void onPageShowRealData(Map<String, String> map) {
+        if (!NetworkUtils.isNetworkConnected()) {
+            new Thread() {
+
+                @Override
+                public void run() {
+
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    getView().footerNetWorkError();
+                    return;
+
+
+                }
+            }.start();
+        }
+
+        MyObserver myObserver=new MyObserver(new ValueCallBack<AppData<Map<String,Object>>>() {
+
+
+            @Override
+            public void onSubscribe(Disposable d) {
+                setDisposable(d);
+
+            }
+
+            @Override
+            public void onNext(AppData<Map<String, Object>> appData) {
+                getView().notifyDataChange(appData.getList());
+
+
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+        mModel.getRealData(map,myObserver,getProvider());
+
+
     }
 }

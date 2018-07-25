@@ -8,5 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 public interface IRealDataView extends IBaseView {
-    void  showRecyclerView(List<Map<String,Object>> list);
+    void  showRecyclerView(List<Map<String,Object>> list,int total);
+    void notifyDataChange(List<Map<String,Object>> list);
+    //下拉刷新时出现网络问题
+    void  footerNetWorkError();
 }

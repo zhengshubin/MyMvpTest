@@ -18,6 +18,7 @@ import com.gdqt.mymvptest.common.ActivityCollector;
 import com.gdqt.mymvptest.common.CancelLoadingListener;
 import com.gdqt.mymvptest.common.CustomProgressDialog;
 import com.gdqt.mymvptest.utils.LogUtils;
+import com.gdqt.mymvptest.utils.NetworkUtils;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -36,6 +37,7 @@ public class BaseActivity extends RxAppCompatActivity implements IBaseView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         ActivityCollector.addActivity(this);
         initProgressBar();
 
@@ -51,13 +53,18 @@ public class BaseActivity extends RxAppCompatActivity implements IBaseView {
        mToolBar=view.findViewById(R.id.tool_bar);
         mToolBar.setTitle(title);
         setSupportActionBar(mToolBar);
-        setHomeAsUp(isNeedHomeAsUp);
+
+
     }
 
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
         setUnbinder(ButterKnife.bind(this));
+    }
+    public void setNetErrorContentView(String title,boolean isNeedHomeAsUp){
+
+
     }
 
     //连接两个布局

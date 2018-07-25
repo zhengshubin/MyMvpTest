@@ -1,4 +1,4 @@
-package com.cundong.recyclerview;
+package com.gdqt.mymvptest.HeadAndFooterRecyclerView;
 
 import android.view.View;
 

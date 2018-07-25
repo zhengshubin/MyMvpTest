@@ -1,4 +1,4 @@
-package com.cundong.recyclerview;
+package com.gdqt.mymvptest.HeadAndFooterRecyclerView;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -55,7 +55,7 @@ public class ExStaggeredGridLayoutManager extends StaggeredGridLayoutManager {
                          *占用所有的列
                          * @see https://plus.google.com/+EtienneLawlor/posts/c5T7fu9ujqi
                          */
-                        StaggeredGridLayoutManager.LayoutParams lp = (StaggeredGridLayoutManager.LayoutParams) view.getLayoutParams();
+                        LayoutParams lp = (LayoutParams) view.getLayoutParams();
                         lp.setFullSpan(true);
                     }
                     // recycler.recycleView(view);

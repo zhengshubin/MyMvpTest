@@ -431,5 +431,6 @@
     <color name="transparent">#00000000</color>
     <color name="editColor">#8a8a8a</color>
     <color name="select">#e4efc9</color>
+    <color name="color_00">#8A000000</color>
 
 </resources>

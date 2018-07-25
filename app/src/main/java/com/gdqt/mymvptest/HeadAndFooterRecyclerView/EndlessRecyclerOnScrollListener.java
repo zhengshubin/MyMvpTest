@@ -1,4 +1,4 @@
-package com.cundong.recyclerview;
+package com.gdqt.mymvptest.HeadAndFooterRecyclerView;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -101,6 +101,7 @@ public class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListen
 
     @Override
     public void onLoadNextPage(final View view) {
+
     }
 
     public static enum LayoutManagerType {
