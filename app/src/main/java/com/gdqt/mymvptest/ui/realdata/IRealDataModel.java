@@ -13,6 +13,7 @@ import io.reactivex.Observer;
 public interface IRealDataModel extends IBaseModel {
 
     public Observable getRealData(Map<String,String>map, Observer observer, LifecycleProvider<ActivityEvent> provider);
+    public Observable getCompanyID(Observer observer, LifecycleProvider<ActivityEvent> provider);
 
 
 }

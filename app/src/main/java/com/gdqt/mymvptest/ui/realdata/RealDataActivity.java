@@ -35,6 +35,7 @@ public class RealDataActivity extends BaseActivity implements IRealDataView {
     /**已经获取到多少条数据了*/
     private int mCurrentCounter = 0;
     private int mCurrentPage=1;
+    private String COMPANY_ID="";
 private List<Map<String,Object>> mList=new ArrayList<>();
   private HashMap<String,String>param=new HashMap<>();
   private HeaderAndFooterRecyclerViewAdapter mHeaderAndFooterRecyclerViewAdapter=null;
@@ -50,6 +51,7 @@ private List<Map<String,Object>> mList=new ArrayList<>();
         setContentViewWithNetwork(R.id.ll_realData,R.layout.activity_real_data,"实时监测",true);
         mPresenter=new RealDataPresenter(RealDataActivity.this);
         initPresenter(mPresenter);
+        mPresenter.onGetCompanyID();
         initMap();
         if (NetworkUtils.isNetworkConnected()) {
             initView();
@@ -113,7 +115,7 @@ private List<Map<String,Object>> mList=new ArrayList<>();
     }
     void  initMap(){
         param.clear();
-        param.put("COMPANY_ID", 1 +"");
+        param.put("COMPANY_ID", 1+"");
         param.put("sidx", "F.ID");
         param.put("sord", "DESC");
         param.put("rows", REQUEST_COUNT+"");
@@ -164,6 +166,11 @@ private List<Map<String,Object>> mList=new ArrayList<>();
 
     }
 
+    @Override
+    public void getCompanyID(String companyID) {
+        COMPANY_ID=companyID;
+    }
+
     //下滑分页加载监听事件
     private EndlessRecyclerOnScrollListener mOnScrollListener = new EndlessRecyclerOnScrollListener(){
         @Override
@@ -183,6 +190,7 @@ private List<Map<String,Object>> mList=new ArrayList<>();
                 if (NetworkUtils.isNetworkConnected()) {
                     mCurrentPage += 1;
                     initMap();
+                    Log.d(TAG, "onLoadNextPage: "+COMPANY_ID);
                 }
              mPresenter.onPageShowRealData(param);
             } else {

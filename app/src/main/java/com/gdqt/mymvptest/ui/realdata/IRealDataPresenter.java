@@ -9,4 +9,5 @@ public interface IRealDataPresenter<V extends IRealDataView> extends IBasePresen
     void onFirstShowRealData(Map<String,String> map,boolean isRefresh);
     //分页展示剩下的数据
     void onPageShowRealData(Map<String,String>map);
+    void onGetCompanyID();
 }

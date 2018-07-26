@@ -1,6 +1,6 @@
 package com.gdqt.mymvptest.ui.base;
 
-import com.trello.rxlifecycle.android.ActivityEvent;
+import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.trello.rxlifecycle2.LifecycleProvider;
 
 import java.lang.ref.Reference;
