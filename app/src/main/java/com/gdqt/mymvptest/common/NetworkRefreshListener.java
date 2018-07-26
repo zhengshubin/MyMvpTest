@@ -4,8 +4,8 @@ package com.gdqt.mymvptest.common;
 *create：2018/7/24
 * description:分页加载监听事件
 */
-public interface PageLoadingListener {
+public interface  NetworkRefreshListener {
+void  refresh();
 
-    void  loadData();
 
 }

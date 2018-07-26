@@ -8,11 +8,13 @@ import com.gdqt.mymvptest.common.ValueCallBack;
 import com.gdqt.mymvptest.entity.AppData;
 import com.gdqt.mymvptest.entity.ResultData;
 import com.gdqt.mymvptest.ui.base.BasePresenter;
+import com.gdqt.mymvptest.utils.FormatUtils;
 import com.gdqt.mymvptest.utils.LogUtils;
 import com.gdqt.mymvptest.utils.NetworkUtils;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -65,9 +67,8 @@ public class RealDataPresenter<V extends IRealDataView> extends BasePresenter<V>
                 map.put("FREEZE_DATE","创建时间");
                 list.add(map);
                 for (Map<String,Object> map1:subjects.getList()){
-                    list.add(map1);
+                    list.add(format(map1));
                 }
-
                 LogUtils.d("DDF",list.get(0).toString());
                   getView().showRecyclerView(list,Integer.parseInt(subjects.getTotal()));
 
@@ -123,6 +124,10 @@ public class RealDataPresenter<V extends IRealDataView> extends BasePresenter<V>
 
             @Override
             public void onNext(AppData<Map<String, Object>> appData) {
+                List<Map<String,Object>> list=new ArrayList<>();
+                for (Map<String,Object> map:appData.getList()){
+                    list.add(format(map));
+                }
                 getView().notifyDataChange(appData.getList());
 
 
@@ -141,6 +146,15 @@ public class RealDataPresenter<V extends IRealDataView> extends BasePresenter<V>
         });
         mModel.getRealData(map,myObserver,getProvider());
 
+
+    }
+   Map<String,Object> format(Map<String,Object> map){
+       long time=(long) Double.parseDouble(map.get("FREEZE_DATE").toString());
+
+            String FREEZE_DATE=FormatUtils.DateFormat(time);
+       Log.d(TAG, "format: "+FREEZE_DATE);
+            map.put("FREEZE_DATE",FREEZE_DATE);
+        return map;
 
     }
 }

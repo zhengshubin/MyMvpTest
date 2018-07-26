@@ -158,7 +158,6 @@ public class MainActivity extends BaseActivity implements IMainView {
     @Override
     protected void onResume() {
         super.onResume();
-        drawerLayout.closeDrawer(Gravity.START);
     }
 }
 

@@ -10,8 +10,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gdqt.mymvptest.R;
+import com.gdqt.mymvptest.utils.FormatUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

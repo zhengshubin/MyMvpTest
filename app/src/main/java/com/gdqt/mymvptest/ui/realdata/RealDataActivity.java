@@ -10,6 +10,7 @@ import com.gdqt.mymvptest.HeadAndFooterRecyclerView.HeaderAndFooterRecyclerViewA
 import com.gdqt.mymvptest.R;
 import com.gdqt.mymvptest.common.LoadingFooter;
 import com.gdqt.mymvptest.common.MyAdapter;
+import com.gdqt.mymvptest.common.NetworkRefreshListener;
 import com.gdqt.mymvptest.ui.base.BaseActivity;
 import com.gdqt.mymvptest.utils.NetworkUtils;
 import com.gdqt.mymvptest.utils.RecyclerViewStateUtils;
@@ -29,7 +30,7 @@ public class RealDataActivity extends BaseActivity implements IRealDataView {
     private  int mTotalCounter = 0;
 
     /**每一页展示多少条数据*/
-    private static final int REQUEST_COUNT = 7;
+    private static final int REQUEST_COUNT = 11;
 
     /**已经获取到多少条数据了*/
     private int mCurrentCounter = 0;
@@ -46,18 +47,27 @@ private List<Map<String,Object>> mList=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_real_data,"实时监测",true);
-
-        mPresenter=new RealDataPresenter(this);
+        setContentViewWithNetwork(R.id.ll_realData,R.layout.activity_real_data,"实时监测",true);
+        mPresenter=new RealDataPresenter(RealDataActivity.this);
         initPresenter(mPresenter);
         initMap();
-        initView();
+        if (NetworkUtils.isNetworkConnected()) {
+            initView();
+        }
+        setNetworkRefreshListener(new NetworkRefreshListener() {
+            @Override
+            public void refresh() {
+                initView();
+            }
+        });
+
 
 
 
 
     }
+
+
     void initView(){
         mPresenter.onFirstShowRealData(param,isRefresh);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -118,7 +128,8 @@ private List<Map<String,Object>> mList=new ArrayList<>();
         mList.clear();
         addItems(list);
         mCurrentCounter+=mList.size();
-        if (!isRefresh) {
+        //解决当进入页面时取消加载，此时onNext事件执行不了即showRecyclerView执行不了，mAdapter为空。
+        if (!isRefresh||mAdapter==null) {
             mAdapter = new MyAdapter(mList);
             mHeaderAndFooterRecyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(mAdapter);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
