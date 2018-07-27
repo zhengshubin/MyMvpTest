@@ -38,6 +38,9 @@ public class RealDataPresenter<V extends IRealDataView> extends BasePresenter<V>
     public void onFirstShowRealData(Map<String,String> map, final boolean isRefresh) {
         if (!NetworkUtils.isNetworkConnected()){
             getView().netDisconnect();
+            if (isRefresh){
+                getView().setRefreshState(false);
+            }
             return;
         }
         //如果不是刷新类型就不需要打开加载画面
@@ -57,7 +60,10 @@ public class RealDataPresenter<V extends IRealDataView> extends BasePresenter<V>
                 if (!isViewAttached()){
                     return;
                 }
-                if (!isRefresh) {
+                if (isRefresh) {
+                    getView().setRefreshState(true);
+
+                }else {
                     getView().hideLoding();
                 }
                 List<Map<String,Object>> list=new ArrayList<>();
@@ -78,7 +84,14 @@ public class RealDataPresenter<V extends IRealDataView> extends BasePresenter<V>
 
             @Override
             public void onError(Throwable e) {
-                getView().hideLoding();
+                if (isRefresh){
+                    getView().setRefreshState(false);
+                }else {
+                    Log.d(TAG, "onError: ");
+                    getView().hideLoding();
+
+
+                }
                 getView().onError(e.getMessage());
 
             }
@@ -152,7 +165,7 @@ public class RealDataPresenter<V extends IRealDataView> extends BasePresenter<V>
 
     @Override
     public void onGetCompanyID() {
-        MyObserver<String> myObserver=new MyObserver<>(new ValueCallBack<String>() {
+        MyObserver<String> myObserver=new MyObserver<>(new ValueCallBack<Integer>() {
             @Override
             public void onSubscribe(Disposable d) {
                 setDisposable(d);
@@ -160,10 +173,9 @@ public class RealDataPresenter<V extends IRealDataView> extends BasePresenter<V>
             }
 
             @Override
-            public void onNext(String companyID) {
-                if (!TextUtils.isEmpty(companyID)) {
-                    getView().getCompanyID(companyID);
-                }
+            public void onNext(Integer companyID) {
+                    getView().setCompanyID(companyID+"");
+
 
 
             }

@@ -12,5 +12,6 @@ public interface IRealDataView extends IBaseView {
     void notifyDataChange(List<Map<String,Object>> list);
     //下拉刷新时出现网络问题
     void  footerNetWorkError();
-    void getCompanyID(String companyID);
+    void setCompanyID(String companyID);
+    void  setRefreshState(boolean isSuccess);
 }

@@ -32,11 +32,12 @@ public class RealDataModel extends BaseModel implements IRealDataModel {
 
     @Override
     public Observable getCompanyID(Observer observer, LifecycleProvider<ActivityEvent> provider) {
-        Observable observable = Observable.create(new ObservableOnSubscribe<String>() {
+        Observable observable = Observable.create(new ObservableOnSubscribe<Integer>() {
 
             @Override
-            public void subscribe(ObservableEmitter<String> emitter) throws Exception {
-                emitter.onNext( DisklrucacheUtils.getLocalData().get(0).get("userCompany").toString());
+            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                Map<String,Object> map= (Map<String, Object>) DisklrucacheUtils.getLocalData().get(0).get("userCompany");
+                emitter.onNext((Integer) map.get("COMPANY_ID"));
             }
 
         });
