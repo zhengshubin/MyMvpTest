@@ -1,5 +1,7 @@
 package com.gdqt.mymvptest.ui.realdata;
 
+import android.util.Log;
+
 import com.gdqt.mymvptest.ApiService.LoginApi;
 import com.gdqt.mymvptest.ApiService.RealDataApi;
 import com.gdqt.mymvptest.common.CustomFunction;
@@ -18,6 +20,7 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 
 public class RealDataModel extends BaseModel implements IRealDataModel {
+    private static String TAG="RealDataModel";
     private RealDataApi api = createRetrofit().create(RealDataApi.class);
 
     @Override
@@ -32,12 +35,14 @@ public class RealDataModel extends BaseModel implements IRealDataModel {
 
     @Override
     public Observable getCompanyID(Observer observer, LifecycleProvider<ActivityEvent> provider) {
-        Observable observable = Observable.create(new ObservableOnSubscribe<Integer>() {
+        Observable observable = Observable.create(new ObservableOnSubscribe<String>() {
 
             @Override
-            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+            public void subscribe(ObservableEmitter<String> emitter) throws Exception {
                 Map<String,Object> map= (Map<String, Object>) DisklrucacheUtils.getLocalData().get(0).get("userCompany");
-                emitter.onNext((Integer) map.get("COMPANY_ID"));
+                String companyID=map.get("COMPANY_ID").toString();
+                emitter.onNext( companyID.substring(0,companyID.indexOf(".")));
+                emitter.onComplete();
             }
 
         });

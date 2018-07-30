@@ -1,5 +1,6 @@
 package com.gdqt.mymvptest.ui.realdata;
 
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,13 +15,17 @@ import com.gdqt.mymvptest.R;
 import com.gdqt.mymvptest.common.LoadingFooter;
 import com.gdqt.mymvptest.common.MyAdapter;
 import com.gdqt.mymvptest.common.NetworkRefreshListener;
+import com.gdqt.mymvptest.entity.RealDataDetailEvent;
 import com.gdqt.mymvptest.ui.base.BaseActivity;
+import com.gdqt.mymvptest.ui.realdata.detail.RealDataDetailActivity;
 import com.gdqt.mymvptest.utils.NetworkUtils;
 import com.gdqt.mymvptest.utils.RecyclerViewStateUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -93,41 +98,11 @@ public class RealDataActivity extends BaseActivity implements IRealDataView {
                      initRefreshData();
                  }
                 mPresenter.onFirstShowRealData(param,isRefresh);
-
-
             }
         });
-//        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                refreshRecyclerView();
-//            }
-//        });
-
-
     }
 
-    //    private void refreshRecyclerView() {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    Thread.sleep(2000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                     initRefreshData();
-//                       mPresenter.onFirstShowRealData(param,isRefresh);
-//                        mSwipeRefreshLayout.setRefreshing(false);
-//                    }
-//                });
-//            }
-//        }).start();
-//
-//    }
+
 //初始化刷新后的数据
     void initRefreshData() {
         mCurrentPage = 1;
@@ -139,8 +114,7 @@ public class RealDataActivity extends BaseActivity implements IRealDataView {
 
     void initMap() {
         param.clear();
-        Log.d(TAG, "initMap: "+COMPANY_ID);
-        param.put("COMPANY_ID", 1 + "");
+        param.put("COMPANY_ID", COMPANY_ID);
         param.put("sidx", "F.ID");
         param.put("sord", "DESC");
         param.put("rows", REQUEST_COUNT + "");
@@ -162,6 +136,13 @@ public class RealDataActivity extends BaseActivity implements IRealDataView {
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             mRecyclerView.addOnScrollListener(mOnScrollListener);
             mRecyclerView.setAdapter(mHeaderAndFooterRecyclerViewAdapter);
+            mAdapter.setItemClickListener(new MyAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    EventBus.getDefault().postSticky(new RealDataDetailEvent(mList.get(position)));
+                    startActivity(new Intent(RealDataActivity.this,RealDataDetailActivity.class));
+                }
+            });
         } else {
             mHeaderAndFooterRecyclerViewAdapter.notifyDataSetChanged();
         }
@@ -175,7 +156,6 @@ public class RealDataActivity extends BaseActivity implements IRealDataView {
             mTotalCounter = (mTotal - 1) * REQUEST_COUNT + list.size();
         }
         mCurrentCounter = mList.size();
-        Log.d(TAG, "notifyDataChange: " + mCurrentCounter);
         RecyclerViewStateUtils.setFooterViewState(mRecyclerView, LoadingFooter.State.Normal);
     }
 
@@ -195,7 +175,7 @@ public class RealDataActivity extends BaseActivity implements IRealDataView {
     @Override
     public void setCompanyID(String companyID) {
         COMPANY_ID = companyID;
-        if (companyID!=""){
+        if (!COMPANY_ID.equals("")){
             initMap();
             mPresenter.onFirstShowRealData(param, isRefresh);
         }

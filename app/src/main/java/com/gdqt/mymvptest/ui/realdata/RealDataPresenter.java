@@ -84,6 +84,7 @@ public class RealDataPresenter<V extends IRealDataView> extends BasePresenter<V>
 
             @Override
             public void onError(Throwable e) {
+                Log.d(TAG, "onError: "+e.getMessage());
                 if (isRefresh){
                     getView().setRefreshState(false);
                 }else {
@@ -165,7 +166,7 @@ public class RealDataPresenter<V extends IRealDataView> extends BasePresenter<V>
 
     @Override
     public void onGetCompanyID() {
-        MyObserver<String> myObserver=new MyObserver<>(new ValueCallBack<Integer>() {
+        MyObserver<String> myObserver=new MyObserver<>(new ValueCallBack<String>() {
             @Override
             public void onSubscribe(Disposable d) {
                 setDisposable(d);
@@ -173,8 +174,8 @@ public class RealDataPresenter<V extends IRealDataView> extends BasePresenter<V>
             }
 
             @Override
-            public void onNext(Integer companyID) {
-                    getView().setCompanyID(companyID+"");
+            public void onNext(String companyID) {
+                    getView().setCompanyID(companyID);
 
 
 
