@@ -18,6 +18,7 @@ import com.gdqt.mymvptest.common.NetworkRefreshListener;
 import com.gdqt.mymvptest.entity.RealDataDetailEvent;
 import com.gdqt.mymvptest.ui.base.BaseActivity;
 import com.gdqt.mymvptest.ui.realdata.detail.RealDataDetailActivity;
+import com.gdqt.mymvptest.utils.DisklrucacheUtils;
 import com.gdqt.mymvptest.utils.NetworkUtils;
 import com.gdqt.mymvptest.utils.RecyclerViewStateUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -27,6 +28,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -88,7 +90,17 @@ public class RealDataActivity extends BaseActivity implements IRealDataView {
 
 
     void initView() {
-        mPresenter.onGetCompanyID();
+            try {
+                COMPANY_ID= DisklrucacheUtils.getCompanyID();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        if (!COMPANY_ID.equals("")){
+            initMap();
+            mPresenter.onFirstShowRealData(param, isRefresh);
+        }
          refreshLayout.setEnableLoadMore(false);
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -172,15 +184,7 @@ public class RealDataActivity extends BaseActivity implements IRealDataView {
 
     }
 
-    @Override
-    public void setCompanyID(String companyID) {
-        COMPANY_ID = companyID;
-        if (!COMPANY_ID.equals("")){
-            initMap();
-            mPresenter.onFirstShowRealData(param, isRefresh);
-        }
 
-    }
 
     @Override
     public void setRefreshState(boolean isSuccess) {

@@ -11,9 +11,8 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 
 public interface IRealDataModel extends IBaseModel {
+    public void getRealData(Map<String,String>map, Observer observer, LifecycleProvider<ActivityEvent> provider);
 
-    public Observable getRealData(Map<String,String>map, Observer observer, LifecycleProvider<ActivityEvent> provider);
-    public Observable getCompanyID(Observer observer, LifecycleProvider<ActivityEvent> provider);
 
 
 }

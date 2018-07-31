@@ -107,4 +107,18 @@ public  class DisklrucacheUtils {
         editor.abort();
         return false;
     }
+
+    public static  String  getCompanyID() throws  IOException{
+        Map<String,Object> map= (Map<String, Object>) getLocalData().get(0).get("userCompany");
+        String companyID=map.get("COMPANY_ID").toString();
+       return companyID.substring(0,companyID.indexOf("."));
+    }
+    public static String[] getFFMNames() throws  IOException{
+      List<Map<String,Object>> list= (List<Map<String, Object>>) getLocalData().get(0).get("ffmData");
+      String[] FFM_NAMES=new  String[list.size()];
+      for (int i=0;i<list.size();i++){
+          FFM_NAMES[i]=list.get(i).get("FFM_NAME").toString();
+      }
+return  FFM_NAMES;
+    }
 }

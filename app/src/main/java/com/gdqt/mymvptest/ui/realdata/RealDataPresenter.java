@@ -164,36 +164,7 @@ public class RealDataPresenter<V extends IRealDataView> extends BasePresenter<V>
 
     }
 
-    @Override
-    public void onGetCompanyID() {
-        MyObserver<String> myObserver=new MyObserver<>(new ValueCallBack<String>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-                setDisposable(d);
 
-            }
-
-            @Override
-            public void onNext(String companyID) {
-                    getView().setCompanyID(companyID);
-
-
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                getView().onError(e.getMessage());
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
-        mModel.getCompanyID(myObserver,getProvider());
-    }
 
     Map<String,Object> format(Map<String,Object> map){
        long time=(long) Double.parseDouble(map.get("FREEZE_DATE").toString());

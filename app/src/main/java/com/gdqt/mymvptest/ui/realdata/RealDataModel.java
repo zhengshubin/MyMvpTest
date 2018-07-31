@@ -24,29 +24,12 @@ public class RealDataModel extends BaseModel implements IRealDataModel {
     private RealDataApi api = createRetrofit().create(RealDataApi.class);
 
     @Override
-    public Observable getRealData(Map<String, String> map, Observer observer, LifecycleProvider<ActivityEvent> provider) {
+    public void getRealData(Map<String, String> map, Observer observer, LifecycleProvider<ActivityEvent> provider) {
         Observable observable = api
                 .getRealData(map.get("DMA_NAME"), map.get("COMPANY_ID"), map.get("sidx"), map
                         .get("sord"), map.get("rows"), map.get("page"))
                 .map(new CustomFunction.ResultDataFunc<AppData>());
         toSubscribe(observable, observer, provider);
-        return observable;
     }
 
-    @Override
-    public Observable getCompanyID(Observer observer, LifecycleProvider<ActivityEvent> provider) {
-        Observable observable = Observable.create(new ObservableOnSubscribe<String>() {
-
-            @Override
-            public void subscribe(ObservableEmitter<String> emitter) throws Exception {
-                Map<String,Object> map= (Map<String, Object>) DisklrucacheUtils.getLocalData().get(0).get("userCompany");
-                String companyID=map.get("COMPANY_ID").toString();
-                emitter.onNext( companyID.substring(0,companyID.indexOf(".")));
-                emitter.onComplete();
-            }
-
-        });
-        toSubscribe(observable, observer, provider);
-        return observable;
-    }
 }

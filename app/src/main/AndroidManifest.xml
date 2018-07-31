@@ -28,7 +28,9 @@
         </activity>
         <activity android:name=".ui.userinfo.UserInfoActivity" />
         <activity android:name=".ui.realdata.RealDataActivity" />
-        <activity android:name=".ui.realdata.detail.RealDataDetailActivity"></activity>
+        <activity android:name=".ui.realdata.detail.RealDataDetailActivity" />
+        <activity android:name=".ui.pressureAnalysis.PressureAnalysisActivity" />
+        <activity android:name=".ui.alarmAnalysis.AlarmAnalysisActivity"></activity>
     </application>
 
 </manifest>
