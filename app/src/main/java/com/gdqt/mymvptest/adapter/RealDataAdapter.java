@@ -1,32 +1,20 @@
-package com.gdqt.mymvptest.common;
+package com.gdqt.mymvptest.adapter;
 
 
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gdqt.mymvptest.R;
-import com.gdqt.mymvptest.ui.login.LoginActivity;
-import com.gdqt.mymvptest.ui.realdata.RealDataActivity;
-import com.gdqt.mymvptest.utils.FormatUtils;
-import com.gdqt.mymvptest.utils.LogUtils;
-import org.greenrobot.eventbus.EventBus;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>  {
+public class RealDataAdapter extends RecyclerView.Adapter<RealDataAdapter.ViewHolder>  {
     public void setItemClickListener(OnItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
     }
@@ -36,11 +24,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>  {
     }
     private static final  int TYPE_HEADER=0;
     private static  final int TYPE_NORMAL=1;
-    private static final int TYPE_FOOTOR=2;
     private List<Map<String,Object>> list;
     private OnItemClickListener itemClickListener;
 
-    public  MyAdapter(List<Map<String,Object>> list){
+    public  RealDataAdapter(List<Map<String,Object>> list){
         this.list=list;
 
 

@@ -37,7 +37,7 @@ public class UserInfoActivity extends BaseActivity implements IUserInfoView{
 
 
     }
-    void initView(){
+   public void initView(){
 
 
     }

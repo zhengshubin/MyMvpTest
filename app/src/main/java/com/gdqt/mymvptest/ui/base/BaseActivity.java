@@ -28,13 +28,9 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.reactivex.disposables.Disposable;
 
-public class BaseActivity extends RxAppCompatActivity implements IBaseView {
+public   class BaseActivity extends RxAppCompatActivity implements IBaseView {
     private static final String TAG = "BaseActivity";
 private Button  btnRefresh;
-private NetworkRefreshListener mNetworkRefreshListener;
-public void setNetworkRefreshListener(NetworkRefreshListener networkRefreshListener){
-    mNetworkRefreshListener=networkRefreshListener;
-}
     private Unbinder mUnBinder;
     private Toolbar mToolBar;
     private CustomProgressDialog mProgressDialog;
@@ -72,7 +68,7 @@ private  View mActivityView;
         setUnbinder(ButterKnife.bind(this));
 
     }
-    public void setContentViewWithNetwork(int activityID,int layoutResID,String title,boolean isNeedHomeAsUp){
+    public void setContentViewWithNetwork(int activityID, int layoutResID, String title, boolean isNeedHomeAsUp){
                             if (!NetworkUtils.isNetworkConnected()){
                                 final View view=linkView(inflate(R.layout.layout_toolbar),linkRelativeLayout(R.layout.network_error,layoutResID));
                                 super.setContentView(view);
@@ -94,7 +90,7 @@ private  View mActivityView;
                                         }else {
                                             mActivityView.setVisibility(View.VISIBLE);
                                             mNetworkView.setVisibility(View.GONE);
-                                            mNetworkRefreshListener.refresh();
+                                            initView();
                     }
                 }
             });
@@ -153,7 +149,10 @@ private  View mActivityView;
 
 
     }
-
+    /**
+    * 初始化界面
+    */
+    public   void initView(){};
 
 
     //初始化加载框
@@ -206,7 +205,6 @@ private  View mActivityView;
 
     }
 
-    @Override
     public void setHomeAsUp(boolean isNeedHomeAsUp) {
         ActionBar actionBar = getSupportActionBar();
         if (isNeedHomeAsUp && actionBar != null) {
@@ -216,10 +214,6 @@ private  View mActivityView;
         }
     }
 
-    @Override
-    public void hideToolbar() {
-        mToolBar.setVisibility(View.GONE);
-    }
 
 
     @Override

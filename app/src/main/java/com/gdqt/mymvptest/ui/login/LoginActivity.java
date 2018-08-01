@@ -31,7 +31,7 @@ private LoginPresenter mPresenter=null;
        initView();
 
     }
-void  initView(){
+public void  initView(){
 
    mPresenter.autoLogin();
 

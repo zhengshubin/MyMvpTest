@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/red"
+    android:layout_height="50dp">
+    <TextView
+        android:id="@+id/tv_aa_item_FFM_NAME"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="站点名称"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/tv_aa_item_PRESSURE_LIMIT"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="压力上限值"
+        android:textColor="@color/white"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_aa_item_PRESSURE_ALARM"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="告警压力值"
+        android:textColor="@color/white"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_aa_item_REASON"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="告警原因"
+        android:textColor="@color/white"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_aa_item_CREATE_DATE"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="采集时间"
+        android:textColor="@color/white"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content" />
+</LinearLayout>

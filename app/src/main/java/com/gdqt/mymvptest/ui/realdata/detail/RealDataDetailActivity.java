@@ -39,6 +39,8 @@ private RealDataDetailPresenter  mPresenter=null;
 
     }
 
+
+
     @Override
     protected void onStart() {
 

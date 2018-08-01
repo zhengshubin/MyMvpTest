@@ -9,7 +9,7 @@ public interface IAlarmAnalysisView extends IBaseView {
     /**
     进入页面时展示数据
     */
-    void showFirstRecyclerView(List<Map<String,Object>> list);
+    void showFirstRecyclerView(List<Map<String,Object>> list ,int total);
     /**
     * 向下加载
     */

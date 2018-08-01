@@ -6,6 +6,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.gdqt.mymvptest.R;
 import com.gdqt.mymvptest.entity.UserInfoEvent;
+import com.gdqt.mymvptest.ui.alarmAnalysis.AlarmAnalysisActivity;
 import com.gdqt.mymvptest.ui.realdata.RealDataActivity;
 import com.gdqt.mymvptest.ui.userinfo.UserInfoActivity;
 import com.gdqt.mymvptest.ui.base.BaseActivity;
@@ -57,7 +59,7 @@ public class MainActivity extends BaseActivity implements IMainView {
 
     }
 
-    void initView() {
+   public void initView() {
         setToolBar();
         headView=navigationView.getHeaderView(0);
         tv_username=headView.findViewById(R.id.tv_head_username);
@@ -129,8 +131,12 @@ public class MainActivity extends BaseActivity implements IMainView {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d(TAG, "onItemClick: "+position);
                 switch (position){
                     case 0:startActivity(new Intent(MainActivity.this, RealDataActivity.class));
+                    break;
+                    case 1:startActivity(new Intent(MainActivity.this, AlarmAnalysisActivity.class));
+                    break;
                 }
             }
         });

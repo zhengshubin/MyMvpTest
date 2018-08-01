@@ -1,7 +1,6 @@
 package com.gdqt.mymvptest.ui.realdata;
 
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,9 +11,8 @@ import android.view.View;
 import com.gdqt.mymvptest.HeadAndFooterRecyclerView.EndlessRecyclerOnScrollListener;
 import com.gdqt.mymvptest.HeadAndFooterRecyclerView.HeaderAndFooterRecyclerViewAdapter;
 import com.gdqt.mymvptest.R;
+import com.gdqt.mymvptest.adapter.RealDataAdapter;
 import com.gdqt.mymvptest.common.LoadingFooter;
-import com.gdqt.mymvptest.common.MyAdapter;
-import com.gdqt.mymvptest.common.NetworkRefreshListener;
 import com.gdqt.mymvptest.entity.RealDataDetailEvent;
 import com.gdqt.mymvptest.ui.base.BaseActivity;
 import com.gdqt.mymvptest.ui.realdata.detail.RealDataDetailActivity;
@@ -23,7 +21,6 @@ import com.gdqt.mymvptest.utils.NetworkUtils;
 import com.gdqt.mymvptest.utils.RecyclerViewStateUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import org.greenrobot.eventbus.EventBus;
@@ -65,9 +62,7 @@ public class RealDataActivity extends BaseActivity implements IRealDataView {
     private HeaderAndFooterRecyclerViewAdapter mHeaderAndFooterRecyclerViewAdapter = null;
     @BindView(R.id.rv_realData)
     RecyclerView mRecyclerView;
-    //    @BindView(R.id.refresh_realData)
-//    SwipeRefreshLayout mSwipeRefreshLayout;
-    private MyAdapter mAdapter;
+    private RealDataAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,18 +73,13 @@ public class RealDataActivity extends BaseActivity implements IRealDataView {
         if (NetworkUtils.isNetworkConnected()) {
             initView();
         }
-        setNetworkRefreshListener(new NetworkRefreshListener() {
-            @Override
-            public void refresh() {
-                initView();
-            }
-        });
+
 
 
     }
 
 
-    void initView() {
+   public void initView() {
             try {
                 COMPANY_ID= DisklrucacheUtils.getCompanyID();
             } catch (IOException e) {
@@ -143,12 +133,12 @@ public class RealDataActivity extends BaseActivity implements IRealDataView {
         mCurrentCounter += mList.size();
         //解决当进入页面时取消加载，此时onNext事件执行不了即showRecyclerView执行不了，mAdapter为空。
         if (!isRefresh || mAdapter == null) {
-            mAdapter = new MyAdapter(mList);
+            mAdapter = new RealDataAdapter(mList);
             mHeaderAndFooterRecyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(mAdapter);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             mRecyclerView.addOnScrollListener(mOnScrollListener);
             mRecyclerView.setAdapter(mHeaderAndFooterRecyclerViewAdapter);
-            mAdapter.setItemClickListener(new MyAdapter.OnItemClickListener() {
+            mAdapter.setItemClickListener(new RealDataAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
                     EventBus.getDefault().postSticky(new RealDataDetailEvent(mList.get(position)));

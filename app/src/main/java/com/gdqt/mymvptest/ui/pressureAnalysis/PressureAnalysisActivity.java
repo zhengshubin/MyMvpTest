@@ -11,7 +11,7 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PressureAnalysisActivity extends BaseActivity  {
+public class PressureAnalysisActivity extends BaseActivity   {
 
     @BindView(R.id.tab_pressureAnalysis)
     SmartTabLayout mSmartTabLayout;
@@ -23,6 +23,11 @@ public class PressureAnalysisActivity extends BaseActivity  {
         super.onCreate(savedInstanceState);
         setContentViewWithNetwork(R.id.ll_pressureAnalysis, R.layout.activity_pressure_analysis,"压力分析",true);
 
+
+    }
+
+    @Override
+    public void initView() {
 
     }
 }

@@ -5,9 +5,6 @@ import android.support.annotation.StringRes;
 import butterknife.BindString;
 
 public interface IBaseView<T > {
-    void setHomeAsUp(boolean isNeedHomeAsUp);
-
-void hideToolbar();
    void  showLoding();
    void hideLoding();
    void  onError(int resId );
