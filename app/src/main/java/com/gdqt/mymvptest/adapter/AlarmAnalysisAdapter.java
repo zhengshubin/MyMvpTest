@@ -17,7 +17,6 @@ public class AlarmAnalysisAdapter extends RecyclerView.Adapter<AlarmAnalysisAdap
     private static final  int TYPE_HEADER=0;
     private static  final int TYPE_NORMAL=1;
     private List<Map<String,Object>> list;
-    private RealDataAdapter.OnItemClickListener itemClickListener;
 
     public  AlarmAnalysisAdapter(List<Map<String,Object>> list){
         this.list=list;
@@ -55,7 +54,7 @@ public class AlarmAnalysisAdapter extends RecyclerView.Adapter<AlarmAnalysisAdap
         holder.tv_ffm_name.setText(map.get("FFM_NAME").toString());
         holder.tv_pressure_limit.setText(map.get("PRESSURE_LIMIT").toString());
         holder.tv_pressure_alarm.setText(map.get("PRESSURE_ALARM").toString());
-        holder.tv_reason.setText(map.get("RESON").toString());
+        holder.tv_reason.setText(map.get("REASON").toString());
         holder.tv_create_date.setText(map.get("CREATE_DATE").toString());
 
 

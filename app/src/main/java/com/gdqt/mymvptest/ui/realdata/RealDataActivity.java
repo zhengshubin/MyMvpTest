@@ -111,7 +111,7 @@ public class RealDataActivity extends BaseActivity implements IRealDataView {
         mCurrentCounter = 0;
         mTotalCounter = 0;
         mTotal = 0;
-        initMap();
+      setAskPage(mCurrentPage);
     }
 
     void initMap() {

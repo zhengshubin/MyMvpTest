@@ -113,11 +113,12 @@ public  class DisklrucacheUtils {
         String companyID=map.get("COMPANY_ID").toString();
        return companyID.substring(0,companyID.indexOf("."));
     }
-    public static String[] getFFMNames() throws  IOException{
+    public static List getFFMNames() throws  IOException{
       List<Map<String,Object>> list= (List<Map<String, Object>>) getLocalData().get(0).get("ffmData");
-      String[] FFM_NAMES=new  String[list.size()];
-      for (int i=0;i<list.size();i++){
-          FFM_NAMES[i]=list.get(i).get("FFM_NAME").toString();
+      ArrayList<String> FFM_NAMES=new ArrayList();
+      FFM_NAMES.add("所有站点");
+      for (Map<String,Object>map:list){
+         FFM_NAMES.add(map.get("FFM_NAME").toString());
       }
 return  FFM_NAMES;
     }

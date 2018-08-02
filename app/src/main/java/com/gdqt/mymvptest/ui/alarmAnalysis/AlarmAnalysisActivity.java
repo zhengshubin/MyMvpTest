@@ -13,6 +13,8 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.ViewPagerItem;
 import com.ogaclejapan.smarttablayout.utils.ViewPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.ViewPagerItems;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -71,20 +73,20 @@ public class AlarmAnalysisActivity extends BaseActivity implements IAlarmAnalysi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentViewWithNetwork(R.id.ll_alarmAnalysis, R.layout.activity_alarm_analysis, "压力告警", true);
-//        mPresenter = new AlarmAnalysisPresenter(this);
-//        initPresenter(mPresenter);
+        mPresenter = new AlarmAnalysisPresenter(this);
+        initPresenter(mPresenter);
         initView();
 
 
     }
 
     public void initView() {
-        final ViewPagerItemAdapter adapter = new ViewPagerItemAdapter(ViewPagerItems.with(this)
-                .add(R.string.title, R.layout.activity_login)
-                .add("登陆", R.layout.activity_login)
+        FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
+                getSupportFragmentManager(), FragmentPagerItems.with(this)
+                .add(R.string.alarmAnalysis_topLimit,AlarmAnalysisFragment.class )
+                .add(R.string.alarmAnalysis_lowerLimit,AlarmAnalysisFragment.class)
                 .create());
         mViewPager.setAdapter(adapter);
-
         mSmartTabLayout.setViewPager(mViewPager);
         mSmartTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -127,14 +129,29 @@ public class AlarmAnalysisActivity extends BaseActivity implements IAlarmAnalysi
 
     }
 
+    @Override
+    public void refreshRecyclerView(List<Map<String, Object>> list) {
+
+    }
+
 
     @Override
-    public void footerLoding(List<Map<String, Object>> list) {
+    public void footerLoading(List<Map<String, Object>> list) {
 
     }
 
     @Override
-    public void loaingWithFFM_Name(List<Map<String, Object>> list) {
+    public void loadingWithFFM_Name(List<Map<String, Object>> list) {
+
+    }
+
+    @Override
+    public void setRefreshState(boolean isSuccess) {
+
+    }
+
+    @Override
+    public void footerNetworkError() {
 
     }
 }

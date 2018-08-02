@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +18,12 @@ import butterknife.Unbinder;
 
 public   class BaseFragment extends Fragment implements IBaseView{
     private volatile static BaseFragment baseFragment;
+    private static final  String TAG="BaseFragment";
     private  BasePresenter mPresenter;
     private BaseActivity mActivity;
     private Unbinder mUnBinder;
     private  int layoutID;
-    public  void  setLaoutID(int layoutID){
+    public  void  setLayoutID(int layoutID){
         this.layoutID=layoutID;
     }
     //无参的单例模式
@@ -45,8 +47,13 @@ public   class BaseFragment extends Fragment implements IBaseView{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(getLayoutID(),container,false);
         setUnBinder(ButterKnife.bind(this,view));
-        initView();
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        initView();
+        super.onViewCreated(view, savedInstanceState);
     }
 
     public  void initView(){
@@ -85,17 +92,17 @@ public   class BaseFragment extends Fragment implements IBaseView{
 
 
     @Override
-    public void showLoding() {
+    public void showLoading() {
         if (mActivity!=null){
-            mActivity.showLoding();
+            mActivity.showLoading();
         }
 
     }
 
     @Override
-    public void hideLoding() {
+    public void hideLoading() {
         if (mActivity!=null){
-            mActivity.hideLoding();
+            mActivity.hideLoading();
         }
 
     }

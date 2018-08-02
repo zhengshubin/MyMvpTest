@@ -92,6 +92,7 @@
     <string name="error_textview_content">网络出错啦，请点击按钮重新加载</string>
     <string name="error_button_refresh">重新加载</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--告警上限-->
+    <string name="alarmAnalysis_topLimit">告警上限信息</string>
+    <string name="alarmAnalysis_lowerLimit">告警下限信息</string>
 </resources>

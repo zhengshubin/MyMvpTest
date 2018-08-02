@@ -42,7 +42,7 @@ public class LoginPresenter<V extends ILoginView> extends BasePresenter<V> imple
             getView().netDisconnect();
             return;
         }
-       getView().showLoding();
+       getView().showLoading();
         final MyObserver myObserver = new MyObserver(new ValueCallBack<AppData<Map<String, Object>>>() {
 
 
@@ -59,8 +59,8 @@ public class LoginPresenter<V extends ILoginView> extends BasePresenter<V> imple
                 }
                 try {
                     if (DisklrucacheUtils.setLocalData(subjects.getList())) {
-                        getView().hideLoding();
-                        getView().loginSucess();
+                        getView().hideLoading();
+                        getView().loginSuccess();
                         saveLoginInfo(username,password);
                     }
                 } catch (IOException e) {
@@ -76,7 +76,7 @@ public class LoginPresenter<V extends ILoginView> extends BasePresenter<V> imple
                 if (!isViewAttached()){
                     return;
                 }
-                getView().hideLoding();
+                getView().hideLoading();
                 getView().onError(e.getMessage());
 
             }

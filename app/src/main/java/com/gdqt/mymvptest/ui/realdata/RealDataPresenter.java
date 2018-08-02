@@ -45,7 +45,7 @@ public class RealDataPresenter<V extends IRealDataView> extends BasePresenter<V>
         }
         //如果不是刷新类型就不需要打开加载画面
         if (!isRefresh) {
-            getView().showLoding();
+            getView().showLoading();
         }
         MyObserver observer = new MyObserver(new ValueCallBack<AppData<Map<String, Object>>>() {
 
@@ -64,7 +64,7 @@ public class RealDataPresenter<V extends IRealDataView> extends BasePresenter<V>
                     getView().setRefreshState(true);
 
                 }else {
-                    getView().hideLoding();
+                    getView().hideLoading();
                 }
                 List<Map<String,Object>> list=new ArrayList<>();
 
@@ -89,7 +89,7 @@ public class RealDataPresenter<V extends IRealDataView> extends BasePresenter<V>
                     getView().setRefreshState(false);
                 }else {
                     Log.d(TAG, "onError: ");
-                    getView().hideLoding();
+                    getView().hideLoading();
 
 
                 }

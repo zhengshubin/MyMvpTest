@@ -152,7 +152,9 @@ private  View mActivityView;
     /**
     * 初始化界面
     */
-    public   void initView(){};
+    public   void initView(){
+
+    };
 
 
     //初始化加载框
@@ -162,7 +164,7 @@ private  View mActivityView;
             public void cancelLoding() {
                 Disposable disposable = mPresenter.getDisposable();
                 if (disposable != null && !disposable.isDisposed()) {
-                    LogUtils.d(TAG, "cancelLoding: " + "dispose");
+                    LogUtils.d(TAG, "cancelLoading: " + "dispose");
                     disposable.dispose();
                 }
 
@@ -217,7 +219,7 @@ private  View mActivityView;
 
 
     @Override
-    public void showLoding() {
+    public void showLoading() {
 
         mProgressDialog.show();
 
@@ -225,7 +227,7 @@ private  View mActivityView;
     }
 
     @Override
-    public void hideLoding() {
+    public void hideLoading() {
         mProgressDialog.cancel();
 
     }

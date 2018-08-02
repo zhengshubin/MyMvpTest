@@ -8,13 +8,15 @@
     android:id="@+id/ll_alarmAnalysis"
     tools:context=".ui.pressureAnalysis.PressureAnalysisActivity">
     <com.ogaclejapan.smarttablayout.SmartTabLayout
+        android:paddingTop="5dp"
         android:id="@+id/tab_alarmAnalysis"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+
         android:paddingBottom="4dp"
         app:stl_defaultTabTextColor="@color/black"
         app:stl_distributeEvenly="true"
-        app:stl_indicatorColor="@color/blueberryColor"
+        app:stl_indicatorColor="#40C4FF"
         app:stl_indicatorCornerRadius="1.5dp"
         app:stl_indicatorInterpolation="smart"
         app:stl_indicatorThickness="3dp"

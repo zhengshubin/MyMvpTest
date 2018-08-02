@@ -45,7 +45,7 @@ public void  initView(){
     }
 
     @Override
-    public void loginSucess() {
+    public void loginSuccess() {
       startActivity(new Intent(this, MainActivity.class));
 
 

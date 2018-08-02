@@ -28,6 +28,7 @@
             app:srlDrawableProgress="@drawable/ic_progress_puzzle"/>
 
     <android.support.v7.widget.RecyclerView
+        android:paddingTop="5dp"
         android:id="@+id/rv_realData"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
